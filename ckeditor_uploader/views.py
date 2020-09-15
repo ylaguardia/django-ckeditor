@@ -131,7 +131,12 @@ class ImageUploadView(generic.View):
             )
         else:
             _, filename = os.path.split(saved_path)
-            retdata = {"url": url, "uploaded": "1", "fileName": filename}
+
+            im = Image.open(filewrapper.file_object)
+
+            retdata = {'url': url, 'uploaded': '1', 'fileName': filename,
+                       'width': im.width, 'height': im.height}
+
             return JsonResponse(retdata)
 
 
